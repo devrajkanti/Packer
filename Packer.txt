@@ -59,3 +59,18 @@
 	- $ export PACKER_LOG = 1 --> Enable detailed log
 	- $ export PACKER_LOG_PATH = /var/log/packer.log --> Set a path for logs
 	- $ packer build base-image.pkr.hcl --> Run the packer build
+	
+14. Packer Workflow
+	HCL2 Template --> Packer Build --> Provision Instance --> Run Provisioners --> Create AMI --> Register AMI -- > Destroy Instance
+																	^								|	
+																	|								|
+																	|								|
+																	|								V
+																Artifacts						New Image :)	
+																
+	- After hitting Packer build it reaches to AWS and provision instance for us
+
+15. How to set AWS Credentials, Access key, secret keys and session in envoirnmnet variables
+
+16. 
+																
