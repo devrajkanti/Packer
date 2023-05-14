@@ -1,0 +1,61 @@
+1. Why we use Packer?
+	- It helps to create images based on the platform i.e. helps to create image for AMI or Azure or VM Ware or Docker
+
+2. Packer Config -
+	- What I want my image to look like?
+
+3. What is HashiCorp Packer?
+	- Open source machine image creation tool
+	- Automates the installation and configuration on packer made images
+	- Works with multiple envoirnmemts i.e. with a single template images can be made for other clud like GCP, AWS, etc
+	- Eliminate all manual steps for image creation
+	
+4. Packer builds images using a template
+
+5. Templates can be build using either JSON or HCL2(HashiCorp Configuration Language)
+
+6. Template defines settings using blocks - 
+	- Original Image to use(source)
+	- Where to build the image(AWS, VMware, OpenStack)
+	- Files to upload to the Image(scripts, packages, certificates)
+	- Installation and Configuration of the Machine Image
+	- Data to Retrieve when Building
+
+**Core Components of Packers
+
+7. Source block
+	- Defines the initial image to use to create your customized image. Any defined source is reusable within build blocks.
+	- Ex - Building a new AWS image (AMI) we need to point to an existing AMI to customize.
+
+8. Builders 
+	- Builders are responsible for creating machines from the base image, customizing the image as defined(like where to upload it and the scripts we want to execute) and then creating the resulting image.
+	- Builders are plugin that are developed to work with a specific platform.
+	- Everything done to the image is done withing the BUILD block.
+	- This is where the customization work happens.
+
+9. Provisioners 
+	- Provisioners use built-in and third-party integrations to install packages and configure the machine image.
+	- Built-in integrations include file and different shell options
+	- Use file provisionar to upload different files to our image
+	- Shell provisioners - Execute scripts or other files on our resltatnt image
+
+10. Post-processors
+	- Post-processors are executed after the image is built and provisioners are complete. It can be used to upload artifacts, execute uploaded scripts, validate installs, or import an image.
+	- Examples 
+		- Validate a package using checksum
+		- Import a package to AWS as an AMI
+		
+11. Communicators
+	- Communicators are the mechanism that Packer will use to communicate with the new build and upload files, execute scripts, etc
+	- Two communicators available today 
+		- SSH
+		- WinRM
+
+12. Variables
+	- HashiCorp Packer can use variables to define defaults during a build.
+	- Variables can be declared in a .pkrvars.hcl file or .auto.pkrvars.hcl the default .pkr file or any other file name if references when executing the build
+
+13. Logging for Packer - Be default it doesnt have a detailed ooging mechanish, we need to enable it.
+	- $ export PACKER_LOG = 1 --> Enable detailed log
+	- $ export PACKER_LOG_PATH = /var/log/packer.log --> Set a path for logs
+	- $ packer build base-image.pkr.hcl --> Run the packer build
