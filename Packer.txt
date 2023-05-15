@@ -25,7 +25,25 @@
 
 7. Source block
 	- Defines the initial image to use to create your customized image. Any defined source is reusable within build blocks.
-	- Ex - Building a new AWS image (AMI) we need to point to an existing AMI to customize.
+	- Building a new AWS image (AMI) we need to point to an existing AMI to customize.
+	- Source block defines what kind of virtualization to use for the image, how to launch the image.
+	- In the example the amazon-ebs builder configuration launches a t2.micro AMI in the us-west-2 region.
+	- Example
+		source "amazon-ebs" "ubuntu"{
+			ami_name		=	"ubuntu-image-aws"
+			instance_type 	= 	"t2.micro"
+			region 			= 	"us-west-2"
+			ami_id			=	"ami-a1b2c3d4e5"
+			source_ami_filter {
+				filters = {
+					name					= 	"ubuntu/images/*ubuntu-xenial-16.04-amd-server-*"
+					root-device-type		=	"ebs"
+					virtualization-type		=	"hvm"
+				}
+				most_recent		=	true
+				owners			=	["987875877568"]
+			}
+		}
 
 8. Builders 
 	- Builders are responsible for creating machines from the base image, customizing the image as defined(like where to upload it and the scripts we want to execute) and then creating the resulting image.
@@ -72,5 +90,32 @@
 
 15. How to set AWS Credentials, Access key, secret keys and session in envoirnmnet variables
 
-16. 
+16. Writing packer templates
+	- Templates consists of declarations and command, such as what plugins(builders, provisioners, etc.) to use, how to configure the plugins and what order to run them
+	- Plugins are builders, provisioners, post-processors
+	- Packer templates supports two formats - JSON and HCL2
+	- Packer template are easy to develop and read.
+	
+17. HCL2
+	- HashiCorp is moving to HCL2 as the standard format for Packer 1.7+
+	- HCL is designed to strike a balance between human readable and machine parsable.
+
+18. HCL Formatting - 
+	- Confgigueartion format is VCS friendly i.e. multi-line lists, trailing commas, auto-formatting
+	- Only code blocks built into the HCL language are avialable for use
+	- Packer uses a standard file name for simplicity <name>pkr.hcl
+	- Uses syntax constructs like Blocks and Arguments
+	- New features will only be implmented for the HCL format moving forward
+	- HCL Syntax - 
+		<BLOCK TYPE> "<BLOCK LABEL>" "<BLOCK LABEL>" {
+			<IDENTIFIER> = <EXPRESSION>
+			<IDENTIFIER> = <EXPRESSION>
+			<IDENTIFIER> = <EXPRESSION>
+		}
+	- Ordering of the blocks is not mandatory
+	- We can have blocks which are referred to the other files as well.
+	- The order of provisioners or post-processor blocks within a build is th eonly major feature where block order matters
+	- Single line comment - # or //
+	- Multi line comment /* Multi lines */
+	- 
 																
