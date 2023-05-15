@@ -43,6 +43,7 @@
 				most_recent		=	true
 				owners			=	["987875877568"]
 			}
+			ssh_username = "ubuntu"
 		}
 
 8. Builders 
@@ -50,29 +51,88 @@
 	- Builders are plugin that are developed to work with a specific platform.
 	- Everything done to the image is done withing the BUILD block.
 	- This is where the customization work happens.
+	- Build blocks are used in tandem with source blocks abd define what Packer should do with the image after it is launched.
+	- Ex - 
+		build	{
+			sources {
+				"source.amazon-ebs.ubuntu"
+			}
+		}
 
 9. Provisioners 
 	- Provisioners use built-in and third-party integrations to install packages and configure the machine image.
 	- Built-in integrations include file and different shell options
 	- Use file provisionar to upload different files to our image
 	- Shell provisioners - Execute scripts or other files on our resltatnt image
+	- Are embedded inside the build block.
+	- It installs and configure the machine image after it reboots.
+	- Can use one or more provisioners.
+	- Ex - 
+		build	{
+			sources = ["source.amazon-ebs.ubuntu"]
+			
+			provisioner "file"{
+				destination = 	"/tmp"
+				sources		=	"files"
+			}
+			provisioner "shell"{
+				script	=	"scripts/setup.sh"
+			}
+			provisioner "shell"{
+				inline	=	["echo ${var.deploymnet_version} > ~/DEPLOYMENT_VERSION"]
+			}
+		}
 
 10. Post-processors
 	- Post-processors are executed after the image is built and provisioners are complete. It can be used to upload artifacts, execute uploaded scripts, validate installs, or import an image.
 	- Examples 
 		- Validate a package using checksum
 		- Import a package to AWS as an AMI
+	- Can be used to specify what to do after the images are created
+	- Example -
+		build {
+			sources {
+				"source.amazon-ebs.ubuntu"
+			}
+			post-processor "shell-local"{
+				inline = ["rm /tmp/scripyt.sh"]
+			}
+		}
 		
 11. Communicators
 	- Communicators are the mechanism that Packer will use to communicate with the new build and upload files, execute scripts, etc
+	- Are configured within the source block of the template
 	- Two communicators available today 
-		- SSH
+		- SSH - default
 		- WinRM
+		- Builder-Specific (docker exec)
 
 12. Variables
 	- HashiCorp Packer can use variables to define defaults during a build.
 	- Variables can be declared in a .pkrvars.hcl file or .auto.pkrvars.hcl the default .pkr file or any other file name if references when executing the build
-
+	- Example -
+		variable "subnet_id" {
+			type	= 	string
+			deault	=	"subnet-1a2b3c4d5e"
+		}
+		variable "region" {
+			type	= 	string
+			deault	=	"us-east-1"
+		}
+		
+		source "amazon-ebs" "amazon-linux2"{
+			ami_name		=	local.ami_name
+			instance_type	=	"t3.medioum"
+			region			=	var.region
+			source_ami		=	data.amazon-ami.amazon-linux.id
+			ssh_username	=	var.ssh_username
+			subnet_id		=	var.subnet_id
+			tags = {
+				Name = local.ami_name
+			}
+			vpc_id = var.vpc_id
+		}
+		
 13. Logging for Packer - Be default it doesnt have a detailed ooging mechanish, we need to enable it.
 	- $ export PACKER_LOG = 1 --> Enable detailed log
 	- $ export PACKER_LOG_PATH = /var/log/packer.log --> Set a path for logs
