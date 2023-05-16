@@ -48,6 +48,7 @@
 
 8. Builders 
 	- Builders are responsible for creating machines from the base image, customizing the image as defined(like where to upload it and the scripts we want to execute) and then creating the resulting image.
+	- Multiple blocks can be specified in a template.
 	- Builders are plugin that are developed to work with a specific platform.
 	- Everything done to the image is done withing the BUILD block.
 	- This is where the customization work happens.
@@ -58,6 +59,7 @@
 				"source.amazon-ebs.ubuntu"
 			}
 		}
+	
 
 9. Provisioners 
 	- Provisioners use built-in and third-party integrations to install packages and configure the machine image.
@@ -178,4 +180,7 @@
 	- Single line comment - # or //
 	- Multi line comment /* Multi lines */
 	- 
-																
+
+Queries -
+1. EBS-backed AMI
+2. 	
