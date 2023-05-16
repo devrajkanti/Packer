@@ -1,10 +1,10 @@
 
 data "amazon-ami" "windows_2012r2" {
   filters = {
-    name = "Microsoft Windows Server 2012 R2*"
+    name = "Windows_Server-2016-English-Core-Base-*"
   }
   most_recent = true
-  owners      = ["227853672974"]
+  owners      = ["801119661308"]
   region      = "us-east-1"
 }
 
@@ -12,10 +12,8 @@ locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 
 source "amazon-ebs" "windows-2012r2" {
-  ami_name       = "my-windows-2012-aws-{{timestamp}}"
+  ami_name       = "my-Windows_Server-2016-aws-{{timestamp}}"
   communicator   = "winrm"
-  # access_key     = "SOME_ACCESS_KEY"
-  # secret_key     = "SOME_SECRET_KEY"
   instance_type  = "t2.micro"
   region         = "us-east-1"
   source_ami     = "${data.amazon-ami.windows_2012r2.id}"
