@@ -1,10 +1,10 @@
 
 data "amazon-ami" "windows_2012r2" {
   filters = {
-    name = "Windows_Server-2012-R2_RTM-English-64Bit-Base-*"
+    name = "Microsoft Windows Server 2012 R2*"
   }
   most_recent = true
-  owners      = ["AccountNumber"]
+  owners      = ["AccountNo"]
   region      = "us-east-1"
 }
 
