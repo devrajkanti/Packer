@@ -4,7 +4,7 @@ data "amazon-ami" "windows_2012r2" {
     name = "Microsoft Windows Server 2012 R2*"
   }
   most_recent = true
-  owners      = ["AccountNo"]
+  owners      = ["Some Account No"]
   region      = "us-east-1"
 }
 
