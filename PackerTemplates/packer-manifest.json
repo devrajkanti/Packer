@@ -35,7 +35,34 @@
       "artifact_id": "us-east-1:ami-0ffb835c203c9061e",
       "packer_run_uuid": "aa8b5476-b9ff-867e-df4f-e877bc0b4643",
       "custom_data": null
+    },
+    {
+      "name": "windows-2012r2",
+      "builder_type": "amazon-ebs",
+      "build_time": 1684833854,
+      "files": null,
+      "artifact_id": "us-east-1:ami-01177a86597a03f4a",
+      "packer_run_uuid": "b9662630-bc9b-1f94-5147-131a751bc20c",
+      "custom_data": null
+    },
+    {
+      "name": "windows-2012r2",
+      "builder_type": "amazon-ebs",
+      "build_time": 1684948100,
+      "files": null,
+      "artifact_id": "us-east-1:ami-0c192cc0fa3d0b09d",
+      "packer_run_uuid": "17766500-7ec2-28cd-169b-c8f91ecb1637",
+      "custom_data": null
+    },
+    {
+      "name": "windows-2012r2",
+      "builder_type": "amazon-ebs",
+      "build_time": 1684971209,
+      "files": null,
+      "artifact_id": "us-east-1:ami-07ad67030d88259c8",
+      "packer_run_uuid": "aec8aab6-4f9c-2304-c053-693be4b8d046",
+      "custom_data": null
     }
   ],
-  "last_run_uuid": "aa8b5476-b9ff-867e-df4f-e877bc0b4643"
+  "last_run_uuid": "aec8aab6-4f9c-2304-c053-693be4b8d046"
 }
