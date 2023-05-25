@@ -188,3 +188,4 @@ Queries -
 IAM User	
 
 https://stackoverflow.com/questions/75064445/how-can-i-use-packer-to-build-an-image-in-azure-with-a-large-file
+https://www.youtube.com/results?search_query=use+ansible+provisioner+in+packer
