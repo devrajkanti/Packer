@@ -1,0 +1,9 @@
+---
+- name: Copy file to Windows host
+  hosts: all
+
+  tasks:
+    - name: Copy file
+      win_copy:
+        src: "D:\Devraj\Study\Packer\PackerTemplates\LargeFile\Packer.txt.bak"
+        dest: C:\

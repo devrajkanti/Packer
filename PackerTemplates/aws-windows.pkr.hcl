@@ -37,6 +37,17 @@ build {
     inline = ["C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule"]
   }
 
+  provisioner "ansible-local" {
+    playbook_file = "./scripts/copy.yml"
+    extra_arguments = [
+      "-e", "ansible_winrm_server_cert_validation=ignore",
+      "-e", "ansible_winrm_transport=ntlm",
+      "-vvv"
+    ]
+    user      = "packer"
+    use_proxy = false
+  }
+
   post-processor "manifest" {
   }
 }
