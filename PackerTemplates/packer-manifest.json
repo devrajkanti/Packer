@@ -62,7 +62,16 @@
       "artifact_id": "us-east-1:ami-07ad67030d88259c8",
       "packer_run_uuid": "aec8aab6-4f9c-2304-c053-693be4b8d046",
       "custom_data": null
+    },
+    {
+      "name": "windows-2019r2",
+      "builder_type": "amazon-ebs",
+      "build_time": 1685029123,
+      "files": null,
+      "artifact_id": "us-east-1:ami-037ddee4535c86994",
+      "packer_run_uuid": "69537c69-aa48-7554-8ad7-f768ffad2048",
+      "custom_data": null
     }
   ],
-  "last_run_uuid": "aec8aab6-4f9c-2304-c053-693be4b8d046"
+  "last_run_uuid": "69537c69-aa48-7554-8ad7-f768ffad2048"
 }
