@@ -71,7 +71,25 @@
       "artifact_id": "us-east-1:ami-037ddee4535c86994",
       "packer_run_uuid": "69537c69-aa48-7554-8ad7-f768ffad2048",
       "custom_data": null
+    },
+    {
+      "name": "windows-2019r2",
+      "builder_type": "amazon-ebs",
+      "build_time": 1685168860,
+      "files": null,
+      "artifact_id": "us-east-1:ami-03e83db57a2108989",
+      "packer_run_uuid": "1a0537f0-710c-4647-a763-aca8ad9dde39",
+      "custom_data": null
+    },
+    {
+      "name": "windows-2019r2",
+      "builder_type": "amazon-ebs",
+      "build_time": 1685211853,
+      "files": null,
+      "artifact_id": "us-east-1:ami-05f382adcff9eb609",
+      "packer_run_uuid": "72164495-4f8b-0d18-9d56-2018d7185912",
+      "custom_data": null
     }
   ],
-  "last_run_uuid": "69537c69-aa48-7554-8ad7-f768ffad2048"
+  "last_run_uuid": "72164495-4f8b-0d18-9d56-2018d7185912"
 }

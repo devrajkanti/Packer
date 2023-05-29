@@ -37,15 +37,17 @@ build {
     inline = ["C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule"]
   }
 
-  provisioner "ansible-local" {
-    playbook_file = "./scripts/copy.yml"
-    extra_arguments = [
-      "-e", "ansible_winrm_server_cert_validation=ignore",
-      "-e", "ansible_winrm_transport=ntlm",
-      "-vvv"
-    ]
-    user      = "packer"
-    use_proxy = false
+  provisioner "powershell" {
+    inline = ["cd C:/", "echo pwd", "mkdir SomeDir"]
+  }
+
+  # provisioner "file" {
+  #   destination = "C:\\SomeDir\\robo_copy.ps1"
+  #   source = "D:\\Devraj\\Study\\Packer\\PackerTemplates\\scripts\\robo_copy.ps1"
+  # }
+
+  provisioner "powershell" {
+    elevated_execute_command = powershell -executionpolicy bypass "& { if (Test-Path variable:global:ProgressPreference){$ProgressPreference='SilentlyContinue'};. {{.Vars}}; &'{{.scripts\\robo_copy.ps1}}'; exit $LastExitCode }"
   }
 
   post-processor "manifest" {

@@ -1,0 +1,1 @@
+Start-Process robocopy -ArgumentList D:\Devraj\BackupFromOldLaptop\Python C:\SomeDir /e /copyall
